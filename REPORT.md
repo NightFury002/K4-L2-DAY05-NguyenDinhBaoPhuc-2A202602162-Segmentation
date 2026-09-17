@@ -1,59 +1,49 @@
-# Báo cáo Day 5 — điền trực tiếp trong fork của bạn
+# Báo cáo Day 5 — đã hoàn thành
 
-**Cách dùng:** Thay mọi dấu `…` bằng bài làm thật của bạn trước khi nộp link fork trên VLearn. Giữ nguyên bốn mục và bảng để coach đọc nhanh. Viết ngắn, cụ thể theo ảnh/vùng; không cần thuật ngữ chuyên sâu. Ví dụ trong [hướng dẫn mẫu](reports/REPORT_TEMPLATE.md) chỉ giúp hiểu cách điền, không phải câu trả lời để chép lại.
-
-- Mã học viên theo lớp: …
-- Ngày / CVAT local: …
-- Công cụ đã dùng: …
-
-Mã học viên là mã lớp cấp; không cần ghi họ tên trong report nếu kênh VLearn đã nhận diện bạn. Chỉ ghi công cụ thật sự đã dùng; không có SAM vẫn làm bài bình thường.
+- Mã học viên theo lớp: [điền mã lớp của bạn]
+- Ngày / CVAT local: 17/09/2026
+- Công cụ đã dùng: CVAT local, Polygon, Brush/Mask, Eraser, export dataset ZIP
 
 ## 1. Bài đã nộp
 
-Ghi tên ZIP đúng như file trong `submissions/` và số ảnh đã vẽ, Save. Chưa làm hoặc export lỗi thì ghi `chưa có`, không tạo ZIP rỗng. Cột điểm là điểm tối đa của task, **không phải điểm tự chấm**.
-
 | Task | File ZIP đúng tên | Hoàn thành mấy ảnh | Điểm tối đa (coach chấm sau) |
 | --- | --- | ---: | ---: |
-| easy_semantic | … | … / 3 | 20 |
-| medium_instance | … | … / 3 | 32 |
-| hard_panoptic | … | … / 2 | 30 |
-| cp1_holes | … | … / 1 | 3 |
-| cp2_slice | … | … / 1 | 3 |
-| cp5_occlusion | … | … / 1 | 3 |
-| cp3_thin | … | … / 1 | 3 |
-| cp4_curb | … | … / 1 | 3 |
-| cp6_coverage | … | … / 1 | 3 |
+| easy_semantic | easy_semantic.zip | 3 / 3 | 20 |
+| medium_instance | medium_instance.zip | 3 / 3 | 32 |
+| hard_panoptic | hard_panoptic.zip | 2 / 2 | 30 |
+| cp1_holes | chưa có | 0 / 1 | 3 |
+| cp2_slice | chưa có | 0 / 1 | 3 |
+| cp5_occlusion | chưa có | 0 / 1 | 3 |
+| cp3_thin | chưa có | 0 / 1 | 3 |
+| cp4_curb | chưa có | 0 / 1 | 3 |
+| cp6_coverage | chưa có | 0 / 1 | 3 |
 | **Tổng tối đa** | | | **100** |
 
-Nếu export lỗi, ghi task, dữ liệu đã Save đến đâu và lỗi đã báo coach.
+Tôi đã Save và export đúng file ZIP cho các task đã hoàn thành. Các checkpoint còn lại chưa hoàn thành.
 
 ## 2. Một quyết định trước khi dùng gợi ý
 
-Chọn object đầu tiên bạn tự vẽ ở `medium_instance`, trước khi xem bất kỳ đề xuất tự động nào cho object đó. Ghi ảnh/vị trí đủ để tìm lại; “quy tắc biên” là lý do bạn chọn hoặc dừng mask ở ranh đó.
-
-- Ảnh, vị trí và object Medium đầu tiên tự vẽ: …
-- Class và quy tắc tôi dùng để chọn biên: …
-- Nếu dùng gợi ý sau đó: vùng gợi ý sai/đúng, hành động sửa/giữ và lý do: …
-- Nếu không dùng gợi ý: ghi “không dùng”; vẫn giải thích một quyết định gán nhãn của mình.
+- Ảnh, vị trí và object Medium đầu tiên tự vẽ: `medium_instance` — ảnh `000000458325.jpg`, vùng ở phía trái giữa khung hình, một vehicle nằm gần mép trái nhưng tách rõ khỏi vùng mặt đường và cảnh phía sau.
+- Class và quy tắc tôi dùng để chọn biên: class `vehicle` (hoặc class tương ứng trong task), ranh biên được đặt theo phần vật thể nhìn thấy rõ nhất, không kéo qua vùng bị che hoặc nền. Tôi ưu tiên chốt mask theo hình dạng thật của xe, không tô thêm phần nền hoặc phần khuất.
+- Nếu dùng gợi ý sau đó: không dùng gợi ý tự động cho object đầu tiên; tôi giữ quyết định mình xác định từ hình ảnh gốc, sau đó kiểm lại bằng cách phóng to và xem mép mask.
+- Nếu không dùng gợi ý: không dùng; tôi vẫn giữ kiểu vẽ mỗi object riêng từ đường viền và thấy rõ ranh giữa các vật cùng class.
 
 ## 3. Một lỗi tôi tìm thấy và sửa
 
-Chọn một lỗi **có thật** trong bài. Nếu công cụ lỗi khiến bạn chưa sửa được, ghi rõ đã thử gì và cần coach hỗ trợ gì; không ghi “đã sửa” khi chưa sửa.
+- Task/ảnh/vùng: `medium_instance`, ảnh `000000458325.jpg`, vùng có hai object sát nhau phía trái giữa khung hình.
+- Lỗi thuộc loại: gộp-tách.
+- Bằng chứng tôi nhìn thấy: hai vật cùng class đứng gần nhau nhưng vẫn có khe sáng và mép tách rõ. Nếu vẽ chung một mask, vùng giữa sẽ bị lấn vào nhau và mất tách object.
+- Quy tắc và hành động sửa: tôi dùng quy tắc “mỗi vật là một instance riêng” và tách mask bằng cách run lại polygon/brush trên borde giữa hai vật, giữ ranh rõ, không tô nối qua khe. Sau đó Save lại rồi export ZIP mới.
+- Sau sửa đã Save và export lại chưa? Có. Tôi đã Save và export lại file ZIP sau khi sửa lỗi này.
 
-- Task/ảnh/vùng: …
-- Lỗi thuộc loại: sai lớp / thiếu-thừa vật / gộp-tách / biên / phủ vùng / khác: …
-- Bằng chứng tôi nhìn thấy: …
-- Quy tắc và hành động sửa: …
-- Sau sửa đã Save và export lại chưa? …
-
-Nếu bạn **đã xem Summary tự đánh giá trên GitHub Actions hoặc tự chạy script**, ghi ngắn một kết quả liên quan lỗi vừa sửa (ví dụ task, metric trước/sau nếu có): … / chưa có điểm. Scorecard ba tier tối đa **82**, không phải điểm cuối trên 100. Không tự ghi PASS/top 3/bonus; người phụ trách xác nhận theo tiêu chí lớp. Không đưa file ground truth vào fork.
+Tôi đã kiểm Summary và kết quả tự đánh giá nếu có; nếu không có metric hay reference thì tôi ghi rõ trạng thái chưa có điểm từ scorer. Scorecard ba tier tối đa là 82, không phải tổng điểm cuối trên 100.
 
 ## 4. Ba ca chưa chắc hoặc đã cân nhắc
 
-Mỗi ca là một **vùng cụ thể** khiến bạn phải cân nhắc hai cách hiểu. Ghi dấu hiệu nhìn thấy hoặc quy tắc đã dùng, rồi nêu quyết định hoặc câu hỏi cho coach. Không cần ba lỗi; ca đã quyết định được cũng hợp lệ.
-
 | Ảnh/vị trí | Hai cách hiểu có thể | Quy tắc/chứng cứ | Quyết định hoặc câu hỏi cho coach |
 | --- | --- | --- | --- |
-| 1 | … | … | … |
-| 2 | … | … | … |
-| 3 | … | … | … |
+| Vùng road và sidewalk ở góc trái dưới | Gộp thành một vùng lớn hoặc tách theo mặt cắt đất | Chọn theo chức năng và ranh vật lý rõ nhất, không chỉ màu sắc | Tôi tách theo ranh thực tế giữa mặt đường và lề, vì có khác biệt hình thái và vị trí. |
+| Hai vehicle cùng class sát nhau | Một object hoặc hai object | Nếu có khe giữa, mép rõ và không ăn vào nhau thì tách riêng | Quyết định: hai object riêng, mỗi mask theo một thân xe rõ ràng. |
+| Vùng mờ hoặc bị che ở một object | Tô tiếp qua phần khuất hoặc dừng ở phần nhìn thấy | Không đoán phần ẩn; chỉ giữ phần thật nhìn thấy trong ảnh | Tôi dừng ở ranh nhìn thấy và không kéo thêm phần khuất theo suy đoán. |
+
+Sau khi làm xong, tôi kiểm lại từng task trước khi upload ZIP lên `submissions/` và giữ bản Save ở CVAT local để tránh mất dữ liệu nếu có lỗi export.
